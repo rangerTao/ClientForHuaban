@@ -6,10 +6,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.origamilabs.library.views.StaggeredGridView;
 import com.ranger.client.huaban.R;
 import com.ranger.client.huaban.adapter.ImagePagerAdapter;
-import com.ranger.client.huaban.adapter.StagPictureAdapter;
+import com.ranger.client.huaban.utils.Constant;
 import com.ranger.client.huaban.utils.HuabanUtil;
 
 import android.graphics.Bitmap;
@@ -19,15 +18,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
+import android.util.DisplayMetrics;
+import android.view.InputDevice;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class FlowGridViewAcitivity extends BaseActivity implements
-		OnPageChangeListener {
+public class FlowGridViewAcitivity extends BaseActivity implements OnPageChangeListener {
 
 	public static final int UPDATE_PROGRESS_TEXT = 999;
 
@@ -48,13 +46,9 @@ public class FlowGridViewAcitivity extends BaseActivity implements
 			case UPDATE_PROGRESS_TEXT:
 				String message = (String) msg.obj;
 
-				if (tvProgress != null
-						&& tvProgress.getVisibility() == View.VISIBLE) {
+				if (tvProgress != null && tvProgress.getVisibility() == View.VISIBLE) {
 					tvProgress.setText(message);
 				}
-
-				Log.d("TAG", "uodate message");
-
 				break;
 
 			default:
@@ -68,21 +62,22 @@ public class FlowGridViewAcitivity extends BaseActivity implements
 
 	ImageLoader imageLoader = ImageLoader.getInstance();
 
+	DisplayMetrics dm = new DisplayMetrics();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		Constant.screen_height = dm.heightPixels;
+		Constant.screen_width = dm.widthPixels;
 
 		setContentView(R.layout.huaban_list);
 
 		urlList = new ArrayList<String>();
 
-		options = new DisplayImageOptions.Builder()
-				.showImageForEmptyUri(R.drawable.ic_empty)
-				.showImageOnFail(R.drawable.ic_error)
-				.resetViewBeforeLoading(true).cacheOnDisc(true)
-				.imageScaleType(ImageScaleType.EXACTLY)
-				.bitmapConfig(Bitmap.Config.RGB_565)
-				.displayer(new FadeInBitmapDisplayer(300)).build();
+		options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.ic_empty).showImageOnFail(R.drawable.ic_error).resetViewBeforeLoading(true).cacheOnDisc(true)
+				.imageScaleType(ImageScaleType.EXACTLY).bitmapConfig(Bitmap.Config.RGB_565).displayer(new FadeInBitmapDisplayer(300)).build();
 
 		pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 		sgv = (ViewPager) findViewById(R.id.pager);
@@ -105,8 +100,7 @@ public class FlowGridViewAcitivity extends BaseActivity implements
 		protected void onPostExecute(Object result) {
 
 			if (pinid == 0) {
-				spa = new ImagePagerAdapter(getApplicationContext(), urlList,
-						options);
+				spa = new ImagePagerAdapter(getApplicationContext(), urlList, options);
 				sgv.setAdapter(spa);
 			}
 
@@ -136,14 +130,43 @@ public class FlowGridViewAcitivity extends BaseActivity implements
 	}
 
 	@Override
+	public boolean onGenericMotionEvent(MotionEvent event) {
+
+		if (0 != (event.getSource() & InputDevice.SOURCE_CLASS_POINTER)) {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_SCROLL:
+
+				if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f)
+					selectNext();
+				else
+					selectPrev();
+				return true;
+			}
+		}
+		return super.onGenericMotionEvent(event);
+	}
+
+	private void selectNext() {
+
+		if (sgv.getCurrentItem() < urlList.size())
+			sgv.setCurrentItem(sgv.getCurrentItem() + 1);
+	}
+
+	private void selectPrev() {
+
+		if (sgv.getCurrentItem() > 0)
+			sgv.setCurrentItem(sgv.getCurrentItem() - 1);
+
+	}
+
+	@Override
 	public void onPageScrollStateChanged(int arg0) {
 
 	}
 
 	@Override
-	public void onPageScrolled(int position, float positionOffset,
-			int positionOffsetPixels) {
-		
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
 	}
 
 	@Override

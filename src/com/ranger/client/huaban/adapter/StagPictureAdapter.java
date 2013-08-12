@@ -60,14 +60,17 @@ public class StagPictureAdapter extends BaseAdapter {
 
 			View imageLayout = inflater.inflate(R.layout.item_stag_image, null);
 			pi.iView = (ImageView) imageLayout.findViewById(R.id.image);
-
+			pi.pbLoad  = (ProgressBar) imageLayout
+					.findViewById(R.id.loading);
 			imageLayout.setTag(pi);
 
 			convertView = imageLayout;
 		} else {
 			pi = (PicItem) convertView.getTag();
 		}
-
+		
+		pi.pbLoad.setVisibility(View.GONE);
+		
 		ImageLoader.getInstance().displayImage(mUrls.get(position), pi.iView, option,
 				new SimpleImageLoadingListener() {
 					@Override
@@ -96,7 +99,6 @@ public class StagPictureAdapter extends BaseAdapter {
 						}
 						Toast.makeText(_context, message, Toast.LENGTH_SHORT)
 								.show();
-
 					}
 
 					@Override

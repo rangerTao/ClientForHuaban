@@ -17,16 +17,6 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int drawSelectorOnTop=0x7f010000;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int itemMargin=0x7f010002;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -36,18 +26,50 @@ containing a value of this type.
          */
         public static final int numColumns=0x7f010001;
     }
+    public static final class color {
+        public static final int black=0x7f040000;
+    }
+    public static final class dimen {
+        /**  The standard size (both width and height) of an application icon that
+         will be displayed in the app launcher and elsewhere. 
+         */
+        public static final int app_icon_size=0x7f050003;
+        /**  Size of the fastscroll hint letter 
+         */
+        public static final int fastscroll_overlay_size=0x7f050006;
+        /**  Height of the fastscroll thumb 
+         */
+        public static final int fastscroll_thumb_height=0x7f050008;
+        /**  Width of the fastscroll thumb 
+         */
+        public static final int fastscroll_thumb_width=0x7f050007;
+        public static final int margin=0x7f050000;
+        /**  Height of the status bar 
+         */
+        public static final int status_bar_height=0x7f050005;
+        /**  The height that is used when creating thumbnails of applications. 
+         */
+        public static final int thumbnail_height=0x7f050002;
+        /**  The width that is used when creating thumbnails of applications. 
+         */
+        public static final int thumbnail_width=0x7f050001;
+        public static final int toast_y_offset=0x7f050004;
+    }
     public static final class drawable {
-        public static final int ic_empty=0x7f020000;
-        public static final int ic_error=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int ic_stub=0x7f020003;
+        public static final int empty_photo=0x7f020000;
+        public static final int ic_empty=0x7f020001;
+        public static final int ic_error=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int ic_stub=0x7f020004;
+        public static final int scrollbar_handle_accelerated_anim2=0x7f020005;
     }
     public static final class id {
-        public static final int image=0x7f060003;
-        public static final int loading=0x7f060004;
-        public static final int pager=0x7f060000;
-        public static final int pbLoading=0x7f060001;
-        public static final int tvProgress=0x7f060002;
+        public static final int image=0x7f080004;
+        public static final int linearLayout1=0x7f080001;
+        public static final int loading=0x7f080005;
+        public static final int pager=0x7f080000;
+        public static final int pbLoading=0x7f080002;
+        public static final int tvProgress=0x7f080003;
     }
     public static final class layout {
         public static final int huaban_list=0x7f030000;
@@ -55,8 +77,8 @@ containing a value of this type.
         public static final int item_stag_image=0x7f030002;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int descr_image=0x7f040001;
+        public static final int app_name=0x7f060000;
+        public static final int descr_image=0x7f060001;
     }
     public static final class style {
         /** 
@@ -69,11 +91,11 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f070001;
     }
     public static final class styleable {
         /** Attributes that can be used with a StaggeredGridView.
@@ -83,15 +105,13 @@ containing a value of this type.
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #StaggeredGridView_drawSelectorOnTop com.ranger.client.huaban:drawSelectorOnTop}</code></td><td></td></tr>
-           <tr><td><code>{@link #StaggeredGridView_itemMargin com.ranger.client.huaban:itemMargin}</code></td><td></td></tr>
            <tr><td><code>{@link #StaggeredGridView_numColumns com.ranger.client.huaban:numColumns}</code></td><td></td></tr>
            </table>
            @see #StaggeredGridView_drawSelectorOnTop
-           @see #StaggeredGridView_itemMargin
            @see #StaggeredGridView_numColumns
          */
         public static final int[] StaggeredGridView = {
-            0x7f010000, 0x7f010001, 0x7f010002
+            0x7f010000, 0x7f010001
         };
         /**
           <p>This symbol is the offset where the {@link com.ranger.client.huaban.R.attr#drawSelectorOnTop}
@@ -104,25 +124,9 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:drawSelectorOnTop
+          @attr name com.ranger.client.huaban:drawSelectorOnTop
         */
         public static final int StaggeredGridView_drawSelectorOnTop = 0;
-        /**
-          <p>This symbol is the offset where the {@link com.ranger.client.huaban.R.attr#itemMargin}
-          attribute's value can be found in the {@link #StaggeredGridView} array.
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:itemMargin
-        */
-        public static final int StaggeredGridView_itemMargin = 2;
         /**
           <p>This symbol is the offset where the {@link com.ranger.client.huaban.R.attr#numColumns}
           attribute's value can be found in the {@link #StaggeredGridView} array.
@@ -134,7 +138,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:numColumns
+          @attr name com.ranger.client.huaban:numColumns
         */
         public static final int StaggeredGridView_numColumns = 1;
     };
